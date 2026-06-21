@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>乐鱼体育 · 简明指引</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f6f9fc;
+            color: #1f2b3b;
+            line-height: 1.6;
+            padding: 1.5rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 780px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 12px 28px rgba(28, 56, 68, 0.06), 0 4px 12px rgba(0, 35, 50, 0.04);
+            padding: 2rem 1.8rem 2.5rem;
+            transition: box-shadow 0.2s;
+        }
+
+        @media (max-width: 480px) {
+            .page { padding: 1.6rem 1.2rem 2rem; border-radius: 1.6rem; }
+        }
+
+        /* 蓝绿色点缀 */
+        .accent-border {
+            border-left: 4px solid #2a9d8f;
+            padding-left: 1rem;
+        }
+
+        .badge-soft {
+            display: inline-block;
+            background: #e0f2f0;
+            color: #1b6b62;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 40px;
+            margin-bottom: 0.7rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: #0e2c33;
+            margin-bottom: 0.3rem;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #4c5b68;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px solid #dce8ed;
+            padding-bottom: 0.8rem;
+        }
+
+        .hero-note {
+            background: #eef7f5;
+            border-radius: 20px;
+            padding: 1.4rem 1.6rem;
+            margin-bottom: 2rem;
+            color: #1b4a48;
+            font-size: 0.98rem;
+            box-shadow: inset 0 1px 3px rgba(42, 157, 143, 0.08);
+        }
+
+        .hero-note strong {
+            color: #136b61;
+        }
+
+        .intro-text {
+            font-size: 1.05rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0 1.6rem;
+        }
+
+        @media (max-width: 500px) {
+            .grid-cards { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: #f9fcfe;
+            border-radius: 1.4rem;
+            padding: 1.2rem 1.2rem 1.4rem;
+            border: 1px solid #e2eef2;
+            transition: border 0.2s, background 0.2s;
+        }
+
+        .card:hover {
+            border-color: #87c7be;
+            background: #f3fbf9;
+        }
+
+        .card .emoji-bg {
+            display: inline-block;
+            font-size: 1.6rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #10423d;
+            margin: 0.2rem 0 0.2rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #3d535d;
+            margin-top: 0.2rem;
+        }
+
+        .highlight-link {
+            background: #dff0ed;
+            padding: 0.1rem 0.25rem;
+            border-radius: 6px;
+            color: #136459;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid #80bfb6;
+            transition: background 0.2s;
+        }
+
+        .highlight-link:hover {
+            background: #c1e3dc;
+            border-bottom-color: #2a9d8f;
+        }
+
+        .faq-mini {
+            margin-top: 2.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px dashed #cbdbe2;
+        }
+
+        .faq-item {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #17564d;
+            min-width: 5.2rem;
+            font-size: 0.9rem;
+        }
+
+        .faq-a {
+            color: #34515e;
+            font-size: 0.92rem;
+        }
+
+        .gentle-end {
+            margin-top: 2rem;
+            padding: 1rem 1.2rem;
+            background: #f5faf9;
+            border-radius: 24px;
+            font-size: 0.95rem;
+            color: #28544f;
+            text-align: center;
+            border: 1px solid #d5e7e4;
+        }
+
+        .gentle-end a {
+            color: #0a5f57;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #7fc0b6;
+            font-weight: 500;
+        }
+
+        .gentle-end a:hover {
+            color: #063f39;
+            text-decoration-color: #2a9d8f;
+        }
+
+        .fine-print {
+            margin-top: 1.6rem;
+            font-size: 0.78rem;
+            color: #6c828e;
+            text-align: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #d8e5e9;
+            margin: 1.2rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 开场短句 -->
+    <span class="badge-soft">✦ 简明指引</span>
+    <h1>观赛与体验<br>从从容开始</h1>
+    <div class="subhead">一份日常备忘，陪你更顺畅地接触乐鱼体育</div>
+
+    <!-- 承接段落 -->
+    <div class="hero-note">
+        <strong>先聊两句：</strong>体育不只是比分，更是习惯与节奏。无论你刚接触还是早已熟悉，通过一个稳定的平台了解信息、查看动态，总能省下不少时间。偶尔花几分钟熟悉界面，之后每一步都会更顺手。
+    </div>
+
+    <div class="intro-text accent-border">
+        很多朋友会问：“我想关注赛事内容，从哪开始比较方便？” 其实不用铺开太多，先认准一个入口，再慢慢探索就好。以下是你可能会用到的几个方向——它们不一定面面俱到，但足够覆盖日常。
+    </div>
+
+    <!-- 特点列表 / 网格卡片 -->
+    <div class="grid-cards">
+        <div class="card">
+            <div class="emoji-bg">📋</div>
+            <h3>模块清晰</h3>
+            <p>页面结构分区明确，赛程、数据、资讯各居其位，不会东翻西找。</p>
+        </div>
+        <div class="card">
+            <div class="emoji-bg">🧭</div>
+            <h3>多端适应</h3>
+            <p>手机、平板、电脑都能正常浏览，布局自动适配，不用频繁缩放。</p>
+        </div>
+        <div class="card">
+            <div class="emoji-bg">⚙️</div>
+            <h3>常用功能顺手</h3>
+            <p>收藏、搜索、筛选都放在显眼位置，减少操作步骤，更贴近直觉。</p>
+        </div>
+        <div class="card">
+            <div class="emoji-bg">🕒</div>
+            <h3>更新稳定</h3>
+            <p>内容保持在一定频率更新，你可以大致预估信息的新鲜程度。</p>
+        </div>
+    </div>
+
+    <!-- 访问提醒 / 温和提示 -->
+    <div style="background: #f1f8f6; border-radius: 1.4rem; padding: 1.2rem 1.4rem; margin: 0.8rem 0 0.2rem;">
+        <p style="font-weight: 500; color: #17564d; margin-bottom: 0.2rem;">🔔 两个小提醒</p>
+        <ul style="list-style: none; padding-left: 0; color: #2b5350; font-size: 0.94rem;">
+            <li style="margin-bottom: 0.4rem;">✓ 首次使用建议花几分钟浏览各分区，了解信息分布。</li>
+            <li style="margin-bottom: 0.4rem;">✓ 如果遇到加载缓慢，可以尝试刷新或检查网络环境。</li>
+            <li>✓ 保持浏览器版本更新，能让页面显示更完整。</li>
+        </ul>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <div style="font-weight: 600; color: #17564d; margin-bottom: 0.8rem; font-size: 0.95rem;">❓ 一些常见想法</div>
+        <div class="faq-item">
+            <span class="faq-q">页面复杂吗？</span>
+            <span class="faq-a">不算复杂。主要入口和导航都放在一眼能看到的位置，用几次就熟悉了。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">需要注册吗？</span>
+            <span class="faq-a">部分内容可以直接浏览，具体以页面实际提示为准。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">内容偏重什么？</span>
+            <span class="faq-a">覆盖多个常见体育项目，资讯与数据兼有，你可以按兴趣选择。</span>
+        </div>
+    </div>
+
+    <!-- 温和结尾 + 嵌入链接（严格按照要求：“乐鱼体育”纯文本） -->
+    <div class="gentle-end">
+        🏁 如果你想找一个稳定的起点，不妨从
+        <a href="https://index-m-leyu.com.cn" class="highlight-link">乐鱼体育</a>
+        开始，花几分钟熟悉框架，之后每次使用都会更自然。
+    </div>
+
+    <hr>
+    <div class="fine-print">
+        日常备忘 · 信息仅供参考，页面功能以实际展示为准
+    </div>
+</div>
+</body>
+</html>
