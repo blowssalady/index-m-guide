@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>雨燕直播 · 快速定位 · 信息卡片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f5f9fc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #1a2a3a;
+      min-height: 100vh;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* ===== 主视觉 ===== */
+    .hero {
+      background: linear-gradient(145deg, #0b2e42 0%, #1b4d63 100%);
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2.5rem;
+      color: white;
+      box-shadow: 0 12px 28px -8px rgba(6, 44, 60, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(100, 210, 200, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+    }
+
+    .hero .accent {
+      color: #6cd4c8;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 680px;
+      opacity: 0.9;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(108, 212, 200, 0.18);
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: #b5e8e0;
+      border: 1px solid rgba(108, 212, 200, 0.25);
+    }
+
+    /* ===== 网格卡片区 ===== */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin: 2.2rem 0 1.4rem;
+      padding-left: 0.25rem;
+      border-left: 5px solid #1f8a7a;
+      padding-left: 1rem;
+      color: #0f3342;
+      letter-spacing: -0.01em;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 1.25rem;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 6px 18px rgba(0, 30, 40, 0.06);
+      border: 1px solid #e3edf2;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-card:hover {
+      box-shadow: 0 12px 28px rgba(6, 60, 70, 0.10);
+      transform: translateY(-3px);
+    }
+
+    .info-card .emoji-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      display: block;
+      line-height: 1;
+    }
+
+    .info-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      color: #0e3b4b;
+    }
+
+    .info-card p {
+      font-size: 0.95rem;
+      color: #2c4a5a;
+      flex: 1;
+    }
+
+    .info-card .badge {
+      margin-top: 1rem;
+      align-self: flex-start;
+      background: #dff2ef;
+      color: #0e5e52;
+      padding: 0.25rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* 用途卡片微调 */
+    .use-card {
+      border-top: 4px solid #39a89a;
+    }
+
+    .audience-card {
+      border-top: 4px solid #4ba3b8;
+    }
+
+    /* ===== 自然链接段落 ===== */
+    .link-block {
+      background: #eaf4f2;
+      border-radius: 1.5rem;
+      padding: 2rem 2rem 2.2rem;
+      margin: 2.2rem 0 2rem;
+      border-left: 8px solid #1f8a7a;
+    }
+
+    .link-block p {
+      font-size: 1.05rem;
+      color: #12333f;
+      margin-bottom: 0.6rem;
+      max-width: 800px;
+    }
+
+    .link-block a {
+      color: #0b695b;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid #6ecfc0;
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .link-block a:hover {
+      color: #043b32;
+      border-bottom-color: #043b32;
+    }
+
+    .link-block .subnote {
+      font-size: 0.9rem;
+      color: #3b606b;
+      margin-top: 1rem;
+      border-left: 3px solid #96cfc2;
+      padding-left: 1rem;
+    }
+
+    /* ===== FAQ 摘要 ===== */
+    .faq-mini {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.6rem 1.8rem;
+      margin: 2rem 0 1.2rem;
+      border: 1px solid #d6e6ea;
+    }
+
+    .faq-mini h3 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #134352;
+    }
+
+    .faq-item {
+      display: flex;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #eaf2f5;
+      gap: 1rem;
+    }
+
+    .faq-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 550;
+      min-width: 90px;
+      color: #0a5c51;
+      font-size: 0.95rem;
+    }
+
+    .faq-a {
+      color: #2e4b58;
+      font-size: 0.93rem;
+      flex: 1;
+    }
+
+    .faq-a a {
+      color: #0b7163;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted #79beb2;
+    }
+
+    .faq-a a:hover {
+      border-bottom-style: solid;
+    }
+
+    /* ===== 底部 ===== */
+    .footer-note {
+      margin-top: 3rem;
+      padding: 0.8rem 0 0.2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #547282;
+      border-top: 1px solid #d3e2e8;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 680px) {
+      body {
+        padding: 1rem;
+      }
+
+      .hero {
+        padding: 2rem 1.5rem;
+        border-radius: 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+        margin: 1.8rem 0 1rem;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .link-block {
+        padding: 1.5rem;
+      }
+
+      .faq-mini {
+        padding: 1.2rem;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        padding: 3.5rem 3rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 主视觉 -->
+    <div class="hero">
+      <h1>
+        <span>雨燕</span><span class="accent">直播</span>
+        <span style="font-weight:400; font-size:0.7em; margin-left:0.5rem; opacity:0.7;">· 信息聚合</span>
+      </h1>
+      <p>
+        面向需要快速了解平台特性的用户：不用反复猜测网站提供什么，直接通过结构化卡片识别 <strong>核心用途、适用人群与内容方向</strong>。简洁的视觉层级让信息一目了然。
+      </p>
+      <div class="hero-tag">
+        <span>✦</span> 网格卡片 · 蓝绿点缀 · 移动优先
+      </div>
+    </div>
+
+    <!-- 用途卡片 -->
+    <h2 class="section-title">用途速览</h2>
+    <div class="card-grid">
+      <div class="info-card use-card">
+        <span class="emoji-icon">📡</span>
+        <h3>实时内容索引</h3>
+        <p>汇集多类型直播流及回放资源，按频道、话题、热度分类展示。减少手动筛选成本，快速定位感兴趣的内容。</p>
+        <span class="badge">分类导航</span>
+      </div>
+      <div class="info-card use-card">
+        <span class="emoji-icon">🧩</span>
+        <h3>信息展示与链接</h3>
+        <p>以卡片形式呈现频道简介、封面、状态及直达链接，降低信息过载。每个卡片独立可读，便于横向对比。</p>
+        <span class="badge">结构化展示</span>
+      </div>
+      <div class="info-card use-card">
+        <span class="emoji-icon">📋</span>
+        <h3>动态聚合面板</h3>
+        <p>通过标签与分类筛选，将当前热播、最新上线、推荐内容分列呈现。页面布局适配手机与桌面，信息密度可控。</p>
+        <span class="badge">自适应</span>
+      </div>
+    </div>
+
+    <!-- 适合人群 -->
+    <h2 class="section-title">适合人群</h2>
+    <div class="card-grid">
+      <div class="info-card audience-card">
+        <span class="emoji-icon">👤</span>
+        <h3>日常浏览者</h3>
+        <p>不想频繁切换平台、希望在一个页面里纵览多个直播频道状态与简介。卡片式设计降低认知负荷。</p>
+      </div>
+      <div class="info-card audience-card">
+        <span class="emoji-icon">🔍</span>
+        <h3>快速筛选型用户</h3>
+        <p>有明确的分类偏好（如游戏、体育、脱口秀），通过标签与卡片摘要即可判断是否值得进一步了解。</p>
+      </div>
+      <div class="info-card audience-card">
+        <span class="emoji-icon">📱</span>
+        <h3>移动端阅读者</h3>
+        <p>使用手机浏览器访问，希望获得清晰排版、合理字号、不拥挤的触控区域。页面针对小屏优化间距与字号。</p>
+      </div>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-block">
+      <p>如果你正在寻找一个将直播资源以信息卡片方式集中展示的站点，<a href="https://webs-yuyan.com">雨燕直播</a> 采用网格卡片结构，为不同频道提供统一的信息入口。每个卡片包含标题、状态与简短描述，方便你快速判断是否与自己的兴趣匹配。</p>
+      <p>页面内不包含自动播放或强制跳转，所有交互均为主动选择。你可以通过分类标签缩小范围，或者直接浏览全部分类列表。</p>
+      <div class="subnote">
+        <span>⚡</span> 建议使用现代浏览器访问，以获得卡片阴影、圆角及网格布局的最佳视觉效果。
+      </div>
+    </div>
+
+    <!-- FAQ 摘要（压缩版） -->
+    <div class="faq-mini">
+      <h3>常见疑问 · 摘要</h3>
+      <div class="faq-item">
+        <span class="faq-q">内容来源？</span>
+        <span class="faq-a">聚合自公开频道信息，以索引卡片形式展示，不存储或转码流媒体文件。具体内容合规性请参考各平台政策。</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">如何识别卡片？</span>
+        <span class="faq-a">每个卡片均包含频道名称、标签及简短说明。部分卡片标注“直播中”或“回放”，状态动态更新（需页面刷新）。</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">与<a href="https://webs-yuyan.com">雨燕直播</a>的关联？</span>
+        <span class="faq-a">本页为此网站的介绍索引页，沿用相同蓝绿色系与卡片风格。具体频道数据请直接访问主站浏览。</span>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span>信息卡片风格 · 蓝绿点缀 · 清晰分层</span> · 更新于2025
+    </div>
+
+  </div>
+</body>
+</html>
