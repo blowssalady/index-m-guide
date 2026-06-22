@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雨燕直播 · 信息导览</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background-color: #f7f5f3;
+      color: #2c2b28;
+      line-height: 1.6;
+    }
+
+    /* 深色头图 */
+    .hero {
+      background: linear-gradient(135deg, #1f1e1c 0%, #2b2927 60%, #3b3834 100%);
+      color: #eae6df;
+      padding: 4rem 2rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(232, 182, 130, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 450;
+      letter-spacing: 2px;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero h1 span {
+      color: #d9b382;
+      font-weight: 500;
+    }
+
+    .hero p {
+      max-width: 540px;
+      margin: 1.2rem auto 0;
+      font-size: 1.05rem;
+      color: #cbc4ba;
+      line-height: 1.65;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.5rem 1.6rem;
+      border: 1px solid rgba(232, 182, 130, 0.3);
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #d9b382;
+      letter-spacing: 0.8px;
+    }
+
+    /* 浅色正文区 */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.8rem 4rem;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.8rem 1.4rem 1.6rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition: box-shadow 0.25s ease, transform 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 480;
+      margin-bottom: 0.9rem;
+      color: #2c2b28;
+    }
+
+    .card h3 .accent {
+      color: #b6895a;
+      margin-right: 6px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #4d4944;
+      margin-bottom: 0.3rem;
+    }
+
+    .card .meta-tag {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      color: #7a7268;
+      background: #f0ece7;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+    }
+
+    /* 适合人群单独卡片区域（自然穿插） */
+    .audience-section {
+      margin-bottom: 3rem;
+    }
+
+    .audience-section h2 {
+      font-size: 1.5rem;
+      font-weight: 430;
+      margin-bottom: 1.2rem;
+      color: #2c2b28;
+      border-left: 4px solid #d9b382;
+      padding-left: 1rem;
+    }
+
+    .audience-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.6rem;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.6rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .audience-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: #3c3a36;
+    }
+
+    .audience-item::before {
+      content: '▹';
+      color: #b6895a;
+      font-size: 1.1rem;
+    }
+
+    /* 自然链接段落 */
+    .link-paragraph {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2rem 2rem 2.2rem;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .link-paragraph p {
+      margin-bottom: 1.2rem;
+    }
+
+    .link-paragraph p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 强调色链接 */
+    a {
+      color: #b6895a;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+      font-weight: 440;
+    }
+
+    a:hover {
+      border-bottom-color: #b6895a;
+      color: #8f6d44;
+    }
+
+    /* FAQ 摘要风格 */
+    .faq-mini {
+      background: #f0ece7;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .faq-mini h4 {
+      font-weight: 440;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #2c2b28;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.8rem;
+      font-size: 0.93rem;
+    }
+
+    .faq-mini summary {
+      cursor: pointer;
+      color: #3c3a36;
+      font-weight: 430;
+      padding: 0.3rem 0;
+      outline: none;
+    }
+
+    .faq-mini summary::-webkit-details-marker {
+      color: #b6895a;
+    }
+
+    .faq-mini .answer {
+      padding: 0.4rem 0 0.2rem 1.2rem;
+      color: #4d4944;
+      line-height: 1.6;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e0dbd4;
+      margin: 2.2rem 0 1.6rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7a7268;
+      margin-top: 1.2rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero {
+        padding: 3rem 1.2rem 2.6rem;
+      }
+      .container {
+        padding: 1.8rem 1rem 3rem;
+      }
+      .card-grid {
+        gap: 1.2rem;
+      }
+      .audience-list {
+        padding: 1.2rem 1.2rem;
+      }
+      .link-paragraph {
+        padding: 1.5rem;
+      }
+      .faq-mini {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+      .card h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 hero -->
+  <header class="hero">
+    <h1>关于 <span>雨燕直播</span></h1>
+    <p>一个稳定、克制的页面入口说明 —— 围绕直播服务的常用场景与信息索引，方便你快速了解它的用途与定位。</p>
+    <span class="tagline">信息卡片 · 自然导览</span>
+  </header>
+
+  <!-- 正文区 -->
+  <main class="container">
+
+    <!-- 用途卡片 + 主视觉卡片混合 -->
+    <div class="card-grid">
+      <div class="card">
+        <h3><span class="accent">◈</span> 主视觉 · 界面简述</h3>
+        <p>页面采用深色与浅色分区，以信息卡片承载不同功能说明，整体风格偏安静、低干扰，聚焦于内容本身。</p>
+        <span class="meta-tag">呈现方向</span>
+      </div>
+      <div class="card">
+        <h3><span class="accent">◈</span> 用途 · 直播入口说明</h3>
+        <p>通过自然链接段落与结构化卡片，展示直播服务的常见用途：赛事观看、日常频道浏览、节目回放等。</p>
+        <span class="meta-tag">使用场景</span>
+      </div>
+      <div class="card">
+        <h3><span class="accent">◈</span> 用途 · 信息索引</h3>
+        <p>将功能特点、使用提示、常见问题摘要整合在同一页面，避免过度跳转，方便快速浏览与判断。</p>
+        <span class="meta-tag">页面定位</span>
+      </div>
+    </div>
+
+    <!-- 适合人群 -->
+    <section class="audience-section">
+      <h2>适合人群</h2>
+      <div class="audience-list">
+        <span class="audience-item">习惯通过网页浏览直播的用户</span>
+        <span class="audience-item">希望快速了解平台概况的访客</span>
+        <span class="audience-item">需要稳定访问入口的日常使用者</span>
+        <span class="audience-item">对界面风格与信息组织有要求的观众</span>
+      </div>
+    </section>
+
+    <!-- 自然链接段落（嵌入核心 a 标签） -->
+    <div class="link-paragraph">
+      <p>如果你正在寻找一个结构清晰、信息克制的直播服务说明页，那么 <a href="https://cntv-yuyan.com">雨燕直播</a> 提供了较为直接的浏览路径。页面以卡片和自然段落组织内容，没有过多的营销语言，侧重呈现功能用途与适用人群，便于你快速评估是否符合个人使用习惯。</p>
+      <p>从日常频道浏览到特定赛事关注，<a href="https://cntv-yuyan.com">雨燕直播</a> 整合了直播场景中常见的几个信息维度。下方还附有 FAQ 摘要，覆盖了一些基础的访问与使用疑问，可以作为初步参考。</p>
+      <p>当然，任何线上服务都有其自身的功能边界与更新节奏，建议结合个人实际需求进行尝试。本页面仅作为信息说明，不构成功能承诺。</p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+      <h4>常见疑问 · 摘要</h4>
+      <details>
+        <summary>雨燕直播主要提供哪些内容？</summary>
+        <div class="answer">主要围绕直播流服务，涵盖部分电视频道、体育赛事及节目回放，具体频道列表与版权范围以实际页面为准。</div>
+      </details>
+      <details>
+        <summary>页面访问是否稳定？</summary>
+        <div class="answer">服务稳定性受网络环境、服务器状态等多种因素影响，建议在网络条件良好的情况下使用。如遇临时不可用，可稍后重试。</div>
+      </details>
+      <details>
+        <summary>是否需要注册或付费？</summary>
+        <div class="answer">根据当前页面说明，大部分内容可直接浏览，具体功能权限以实际页面提示为准。本页面不涉及任何付费引导。</div>
+      </details>
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+      页面说明 · 信息卡片式导览 &nbsp;·&nbsp; 内容更新时间：不定期
+    </div>
+
+  </main>
+</body>
+</html>
